@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<h2>Registrar paciente</h2>
+	<form method = "POST">
+		<table>
+			<tr>
+				<td>
+					Usuario <input type = "text" name = "nombreUsuario" />
+				</td>
+				<td>
+					Password <input type = "password" name = "password" />
+				</td>
+			</tr>
+				
+			<tr>	
+				<td>
+					Nombre <input type = "text" name = "nombre" />
+				</td>
+				<td>
+					Direccion <input type = "text" name = "direccion" />
+				</td>
+				<td>
+					ObraSocial <input type = "checkbox" name = "obraSocial" th:checked="${obraSocial}" />
+				</td>
+	
+			</tr>
+			<tr>
+				<td>
+					<input type = "submit" name = "enviar" value = "Enviar" />
+				</td>
+			</tr>
+		</table>
+	</form>
+	
+</body>
+</html>

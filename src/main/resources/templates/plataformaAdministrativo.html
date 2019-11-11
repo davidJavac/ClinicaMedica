@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>Clinica Medica</h1>
+
+	Usuario
+	<span th:text="${usuario.nombreUsuario}"></span> Administrativo
+	<br /> Sector
+	<span th:text="${administrativo.sector}"></span>
+	<br /> Id
+	<span th:text="${usuario.id}"></span>
+	<br /> Password
+	<span th:text="${usuario.password}"></span>
+	<br /> Nombre
+	<span th:text="${administrativo.nombre}"></span>
+	<br /> Direccion
+	<span th:text="${administrativo.direccion}"></span>
+	<br />
+	<form method="POST">
+		<input type="submit" name="logout" value="Logout" />
+	</form>
+</body>
+</html>
