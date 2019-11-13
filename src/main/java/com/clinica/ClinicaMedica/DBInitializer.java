@@ -23,9 +23,15 @@ public class DBInitializer implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
-		Especialidad cardiologia = new Especialidad("Cardiologia", 20);
-		Especialidad urologia = new Especialidad("Urologia", 5);
-		Especialidad reumatologia = new Especialidad("Reumatologia", 10);
+		Especialidad cardiologia = new Especialidad();
+		cardiologia.setNombre("Cardiologia");
+		cardiologia.setCantidad_turnos(3);
+		Especialidad urologia = new Especialidad();
+		urologia.setNombre("Urologia");
+		urologia.setCantidad_turnos(2);
+		Especialidad reumatologia = new Especialidad();
+		reumatologia.setNombre("Reumatologia");
+		reumatologia.setCantidad_turnos(2);
 		List<Especialidad> especialidades = new ArrayList<>();
 		Collections.addAll(especialidades, cardiologia, urologia, reumatologia);
 		especialidadRepository.saveAll(especialidades);

@@ -6,6 +6,7 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Range;
 
+import com.clinica.ClinicaMedica.model.Prestacion;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class TurnoDTO{
@@ -16,8 +17,9 @@ public class TurnoDTO{
 	
 	private PacienteDTO paciente;
 
-	private PrestacionDTO prestacion;
-
+//	private PrestacionDTO prestacion;
+	private Prestacion prestacion;
+	
 	@JsonFormat(pattern = "dd-MM-yyyy")
 	private java.time.LocalDate fecha;
 	@Temporal(TemporalType.TIME)
@@ -43,15 +45,24 @@ public class TurnoDTO{
 		return id;
 	}
 		
-	public PrestacionDTO getPrestacion() {
+	/*public PrestacionDTO getPrestacion() {
 		return prestacion;
 	}
 	
 	
 	public void setPrestacion(PrestacionDTO prestacion) {
 		this.prestacion = prestacion;
-	}
+	}*/
 
+	public Prestacion getPrestacion() {
+		return prestacion;
+	}
+	
+	
+	public void setPrestacion(Prestacion prestacion) {
+		this.prestacion = prestacion;
+	}
+	
 	public MedicoDTO getMedico() {
 		return medico;
 	}

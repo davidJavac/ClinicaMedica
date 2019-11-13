@@ -2,12 +2,17 @@ package com.clinica.ClinicaMedica.model;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
@@ -36,7 +41,22 @@ public class Prestacion implements Serializable{
 		this.tipo = tipo;
 	}
 
-	private String especialidad;
+	@ManyToOne(cascade = CascadeType.MERGE, fetch=FetchType.EAGER)
+	@JoinTable(
+			name = "prestacion_especialidad",
+			joinColumns = @JoinColumn(name = "id_prestacion"),
+			inverseJoinColumns = @JoinColumn(name = "id_especialidad")
+			)
+	private Especialidad especialidad;
+
+	public Especialidad getEspecialidad() {
+		return especialidad;
+	}
+
+	public void setEspecialidad(Especialidad especialidad) {
+		this.especialidad = especialidad;
+	}
+
 	
 
 	public Long getId() {
@@ -45,14 +65,5 @@ public class Prestacion implements Serializable{
 	
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public String getEspecialidad() {
-		return especialidad;
-	}
-
-	public void setEspecialidad(String especialidad) {
-		this.especialidad = especialidad;
-	}
-		
+	}		
 }

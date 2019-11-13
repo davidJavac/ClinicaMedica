@@ -8,10 +8,12 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.clinica.ClinicaMedica.model.BusinessException;
+import com.clinica.ClinicaMedica.model.Especialidad;
 import com.clinica.ClinicaMedica.model.Medico;
 import com.clinica.ClinicaMedica.model.Paciente;
 import com.clinica.ClinicaMedica.model.ResponseTransfer;
 import com.clinica.ClinicaMedica.model.Turno;
+import com.clinica.ClinicaMedica.repository.EspecialidadRepository;
 import com.clinica.ClinicaMedica.repository.MedicoRepository;
 import com.clinica.ClinicaMedica.repository.PacienteRepository;
 import com.clinica.ClinicaMedica.repository.PrestacionRepository;
@@ -31,6 +33,8 @@ public class TurnoService implements Operacionable{
 	private PrestacionRepository prestacionRepository;
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private EspecialidadRepository especialidadRepository;
 	
 	private Map<String, Object> fields;
 	
@@ -107,14 +111,25 @@ public class TurnoService implements Operacionable{
 			
 			Optional<Medico> optional_medico = medicoRepository.findById(turno.getMedico().getId()); 
 			Optional<Paciente> optional_paciente = pacienteRepository.findById(turno.getPaciente().getId());
+			Optional<Especialidad> optional_especialidad = especialidadRepository.findById(turno.getPrestacion().getEspecialidad().
+					getId_especialidad());
 			
 			if(!optional_medico.isPresent()) throw new BusinessException("No existe un médico con el Id solicitado", null);
 			if(!optional_paciente.isPresent()) throw new BusinessException("No existe un paciente con el Id solicitado", null);
+			if(!optional_especialidad.isPresent()) throw new BusinessException("No existe una especialidad"
+					+ " con el Id solicitado", null);
+
+			Especialidad especialidad = optional_especialidad.get();
+			if(especialidad.getCantidad_turnos()>0) especialidad.setCantidad_turnos(especialidad.getCantidad_turnos() -1);
+			else throw new BusinessException("No hay turnos disponibles para la especialidad " + especialidad.getNombre(), null);
 			
 			Turno turno_registered = Optional.of(turnoRepository.save(turno)).get();
 			turno_registered.setMedico(optional_medico.get());
 			turno_registered.setPaciente(optional_paciente.get());
-			//turno_registered.setPrestacion(prestacion);
+			turno_registered.getPrestacion().setEspecialidad(especialidad);
+			turno_registered.getMedico().setEspecialidad(especialidad);
+			
+
 			Turno turno_success = turnoRepository.findById(turno_registered.getId()).get();  
 			ResponseTransfer rt = new ResponseTransfer("El turno se ha registrado con éxito", turno_success);
 			

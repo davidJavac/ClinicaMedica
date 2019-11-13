@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.validation.constraints.Size;
 
+import com.clinica.ClinicaMedica.model.Especialidad;
+
 public class PrestacionDTO implements Serializable{
 
 	private Long id;
@@ -18,7 +20,16 @@ public class PrestacionDTO implements Serializable{
 		this.tipo = tipo;
 	}
 
-	private String especialidad;
+	private EspecialidadDTO especialidad;
+
+	public EspecialidadDTO getEspecialidadDTO() {
+		return especialidad;
+	}
+
+	public void setEspecialidadDTO(EspecialidadDTO especialidad) {
+		this.especialidad = especialidad;
+	}
+
 	
 
 	public Long getId() {
@@ -27,14 +38,6 @@ public class PrestacionDTO implements Serializable{
 	
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public String getEspecialidad() {
-		return especialidad;
-	}
-
-	public void setEspecialidad(String especialidad) {
-		this.especialidad = especialidad;
 	}
 		
 }

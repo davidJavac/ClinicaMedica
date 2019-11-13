@@ -2,7 +2,7 @@ package com.clinica.ClinicaMedica.DTO;
 
 public class EspecialidadDTO{
 
-	private Long id;
+	private Long id_especialidad;
 	private String nombre;
 	private int cantidad_turnos;
 	
@@ -14,15 +14,19 @@ public class EspecialidadDTO{
 		this.cantidad_turnos = cantidad_turnos;
 	}
 	
-	public Long getId() {
-		return id;
-	}
+	
 	public String getNombre() {
 		return nombre;
 	}
-	public void setId(Long id) {
-		this.id = id;
+	
+	public Long getId_especialidad() {
+		return id_especialidad;
 	}
+
+	public void setId_especialidad(Long id_especialidad) {
+		this.id_especialidad = id_especialidad;
+	}
+
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}

@@ -6,9 +6,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.DynamicUpdate;
+
 
 @Entity(name = "Especialidad")
 @Table(name = "especialidad")
+@DynamicUpdate(true)
 public class Especialidad{
 
 	@Id
@@ -16,12 +19,6 @@ public class Especialidad{
 	private Long id_especialidad;
 	private String nombre;
 	private int cantidad_turnos;
-	
-	public Especialidad(String nombre, int cantidad_turnos) {
-		
-		this.nombre = nombre;
-		this.cantidad_turnos = cantidad_turnos;
-	}
 	
 	public int getCantidad_turnos() {
 		return cantidad_turnos;
