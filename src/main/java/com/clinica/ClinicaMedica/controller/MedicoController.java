@@ -18,10 +18,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.clinica.ClinicaMedica.DTO.MedicoDTO;
 import com.clinica.ClinicaMedica.model.BusinessException;
 import com.clinica.ClinicaMedica.model.Medico;
+import com.clinica.ClinicaMedica.model.Paciente;
 import com.clinica.ClinicaMedica.model.Periodo;
 import com.clinica.ClinicaMedica.model.Prestacion;
 import com.clinica.ClinicaMedica.model.ResponseTransfer;
 import com.clinica.ClinicaMedica.model.Usuario;
+import com.clinica.ClinicaMedica.repository.MedicoRepository;
 import com.clinica.ClinicaMedica.service.UserReportable;
 import com.clinica.ClinicaMedica.service.UserService;
 
@@ -38,11 +40,26 @@ public class MedicoController {
 	@Autowired
 	private ModelMapper mapper;
 	
+	@Autowired
+	private MedicoRepository medicoRepository;
+	
+	@PostMapping("/medico/{id}")
+	public ResponseEntity<Medico> buscarMedico(@PathVariable("id") String id ) throws BusinessException{
+		
+		Optional<Medico> optional_medico = medicoRepository.findById(Long.parseLong(id));
+		
+		if(optional_medico.isPresent())
+			return new ResponseEntity<>(optional_medico.get(), HttpStatus.CREATED);
+		else
+			throw new BusinessException("No se ha encontrado el medico en la bd", null);
+	}
+	
 	@PostMapping("/medico")
 	public ResponseEntity<ResponseTransfer> registrarMedico(@Valid @RequestBody MedicoDTO medicoDTO) throws BusinessException{
 		
-		Medico medico = mapper.map(medicoDTO, Medico.class);
-		Optional<ResponseTransfer<Usuario>> optional = userService.registrarUsuario(medico);
+		//Medico medico = mapper.map(medicoDTO, Medico.class);
+
+		Optional<ResponseTransfer<Usuario>> optional = userService.registrarUsuario(medicoDTO);
 		if(optional.isPresent()) {
 			
 			return new ResponseEntity<>(optional.get(), HttpStatus.CREATED);

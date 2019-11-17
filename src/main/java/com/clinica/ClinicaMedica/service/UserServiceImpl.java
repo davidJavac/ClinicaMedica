@@ -2,9 +2,13 @@ package com.clinica.ClinicaMedica.service;
 
 import java.util.Optional;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.clinica.ClinicaMedica.DTO.MedicoDTO;
+import com.clinica.ClinicaMedica.DTO.UsuarioDTO;
 import com.clinica.ClinicaMedica.model.BusinessException;
 import com.clinica.ClinicaMedica.model.Especialidad;
 import com.clinica.ClinicaMedica.model.Medico;
@@ -20,16 +24,23 @@ public class UserServiceImpl implements UserService{
 	private UsuarioRepository usuarioRepository;
 	@Autowired
 	private EspecialidadRepository especialidadRepository;
+	@Autowired
+	private PasswordEncoder bcryptEncoder;
+	@Autowired
+	private ModelMapper mapper;
 	
 	@Override
-	public Optional<ResponseTransfer<Usuario>> registrarUsuario(Usuario usuario) throws BusinessException{
+	public Optional<ResponseTransfer<Usuario>> registrarUsuario(UsuarioDTO usuarioDTO) throws BusinessException{
 		// TODO Auto-generated method stub
 			
-		if(!usuarioRepository.existsByNombreUsuario(usuario.getNombreUsuario())) {
+		if(!usuarioRepository.existsByNombreUsuario(usuarioDTO.getNombreUsuario())) {
 			try {
+				Usuario usuario = mapper.map(usuarioDTO, Usuario.class);
 				
-				if(usuario instanceof Medico) {
-					Medico medico = (Medico) usuario;
+				if(usuarioDTO instanceof MedicoDTO) {
+					//Medico medico = (Medico) usuario;
+					Medico medico = mapper.map(usuarioDTO, Medico.class);
+					medico.setPassword(bcryptEncoder.encode(usuarioDTO.getPassword()));
 					Optional<Especialidad> optional_especialidad = especialidadRepository.findById(
 							medico.getEspecialidad().getId_especialidad());
 					
@@ -42,6 +53,7 @@ public class UserServiceImpl implements UserService{
 					
 				}
 				
+				usuario.setPassword(bcryptEncoder.encode(usuarioDTO.getPassword()));
 				Usuario usuario_saved = usuarioRepository.save(usuario);
 				ResponseTransfer<Usuario> rt = new ResponseTransfer("El usuario se ha registrado con éxito", usuario_saved);
 				return Optional.of(rt);
