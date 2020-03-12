@@ -50,9 +50,9 @@ public class AdministrativoController {
 	@PostMapping("/administrativo")
 	public ResponseEntity<ResponseTransfer> registrarAdministrativo(@Valid @RequestBody AdministrativoDTO administrativoDTO) throws BusinessException{
 		
-		//Administrativo administrativo = mapper.map(administrativoDTO, Administrativo.class);
+		Administrativo administrativo = mapper.map(administrativoDTO, Administrativo.class);
 		
-		Optional<ResponseTransfer<Usuario>> optional = userService.registrarUsuario(administrativoDTO);
+		Optional<ResponseTransfer<Usuario>> optional = userService.registrarUsuario(administrativo);
 		if(optional.isPresent()) {
 			
 			return new ResponseEntity<>(optional.get(), HttpStatus.CREATED);

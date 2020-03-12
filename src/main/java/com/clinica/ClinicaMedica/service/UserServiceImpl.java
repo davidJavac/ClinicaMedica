@@ -30,17 +30,16 @@ public class UserServiceImpl implements UserService{
 	private ModelMapper mapper;
 	
 	@Override
-	public Optional<ResponseTransfer<Usuario>> registrarUsuario(UsuarioDTO usuarioDTO) throws BusinessException{
+	public Optional<ResponseTransfer<Usuario>> registrarUsuario(Usuario usuario) throws BusinessException{
 		// TODO Auto-generated method stub
 			
-		if(!usuarioRepository.existsByNombreUsuario(usuarioDTO.getNombreUsuario())) {
+		if(!usuarioRepository.existsByNombreUsuario(usuario.getNombreUsuario())) {
 			try {
-				Usuario usuario = mapper.map(usuarioDTO, Usuario.class);
 				
-				if(usuarioDTO instanceof MedicoDTO) {
+				if(usuario instanceof Medico) {
 					//Medico medico = (Medico) usuario;
-					Medico medico = mapper.map(usuarioDTO, Medico.class);
-					medico.setPassword(bcryptEncoder.encode(usuarioDTO.getPassword()));
+					Medico medico = mapper.map(usuario, Medico.class);
+					medico.setPassword(bcryptEncoder.encode(usuario.getPassword()));
 					Optional<Especialidad> optional_especialidad = especialidadRepository.findById(
 							medico.getEspecialidad().getId_especialidad());
 					
@@ -53,7 +52,7 @@ public class UserServiceImpl implements UserService{
 					
 				}
 				
-				usuario.setPassword(bcryptEncoder.encode(usuarioDTO.getPassword()));
+				usuario.setPassword(bcryptEncoder.encode(usuario.getPassword()));
 				Usuario usuario_saved = usuarioRepository.save(usuario);
 				ResponseTransfer<Usuario> rt = new ResponseTransfer("El usuario se ha registrado con éxito", usuario_saved);
 				return Optional.of(rt);

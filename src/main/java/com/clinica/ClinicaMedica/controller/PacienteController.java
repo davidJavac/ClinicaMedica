@@ -1,5 +1,6 @@
 package com.clinica.ClinicaMedica.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
@@ -8,6 +9,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,6 +27,7 @@ import com.clinica.ClinicaMedica.service.UserService;
 
 @RestController
 @RequestMapping("api/v1")
+//@CrossOrigin(origins = {"*"})
 public class PacienteController {
 
 	@Autowired
@@ -49,9 +53,9 @@ public class PacienteController {
 	@PostMapping("/paciente")
 	public ResponseEntity<?> registrarPaciente(@Valid @RequestBody PacienteDTO pacienteDTO) throws BusinessException{
 		
-		//Paciente paciente = mapper.map(pacienteDTO, Paciente.class);
+		Paciente paciente = mapper.map(pacienteDTO, Paciente.class);
 		
-		Optional<ResponseTransfer<Usuario>> optional = userService.registrarUsuario(pacienteDTO);
+		Optional<ResponseTransfer<Usuario>> optional = userService.registrarUsuario(paciente);
 		if(optional.isPresent()) {
 			
 			return new ResponseEntity<>(optional.get(), HttpStatus.CREATED);
@@ -61,5 +65,15 @@ public class PacienteController {
 			return new ResponseEntity<ResponseTransfer>(rt, HttpStatus.BAD_REQUEST);
 		}
 	}
+	
+	@CrossOrigin(origins = {"http://localhost:3000"})
+	@GetMapping("/allPacientes")
+	public List<Paciente> allPacientes() throws BusinessException{
+		System.out.println("en allPacientes");
+		List<Paciente> lista_pacientes = pacienteRepository.findAll();
+		return lista_pacientes;
+	}
+
+		
 
 }

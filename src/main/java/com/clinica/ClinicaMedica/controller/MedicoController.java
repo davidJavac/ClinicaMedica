@@ -57,9 +57,9 @@ public class MedicoController {
 	@PostMapping("/medico")
 	public ResponseEntity<ResponseTransfer> registrarMedico(@Valid @RequestBody MedicoDTO medicoDTO) throws BusinessException{
 		
-		//Medico medico = mapper.map(medicoDTO, Medico.class);
+		Medico medico = mapper.map(medicoDTO, Medico.class);
 
-		Optional<ResponseTransfer<Usuario>> optional = userService.registrarUsuario(medicoDTO);
+		Optional<ResponseTransfer<Usuario>> optional = userService.registrarUsuario(medico);
 		if(optional.isPresent()) {
 			
 			return new ResponseEntity<>(optional.get(), HttpStatus.CREATED);

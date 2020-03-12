@@ -21,7 +21,7 @@ import com.clinica.ClinicaMedica.model.JwtResponse;
 import com.clinica.ClinicaMedica.service.JWTUserDetailsService;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = {"http://localhost:3000"})
 public class JwtAuthenticationController {
 
 	@Autowired
@@ -39,6 +39,8 @@ public class JwtAuthenticationController {
 		final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
 		
 		final String token = jwtTokenUtil.generateToken(userDetails);
+		
+		System.out.println("token " + token);
 		
 		return ResponseEntity.ok(new JwtResponse(token));
 	}

@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -24,6 +25,12 @@ public class BusinessExceptionHandler extends ResponseEntityExceptionHandler{
 	public ResponseEntity<Object> handleBusinessException(BusinessException ex){
 		
 		return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(ex.getResponseTransfer());
+	}
+
+	@ExceptionHandler(UsernameNotFoundException.class)
+	public ResponseEntity<Object> handleBusinessException(UsernameNotFoundException ex){
+		
+		return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(ex.getMessage());
 	}
 	
 	@Override

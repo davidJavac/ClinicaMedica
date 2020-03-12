@@ -33,9 +33,9 @@ public class DirectorController {
 	@PostMapping("/director")
 	public ResponseEntity<ResponseTransfer> registrarDirector(@Valid @RequestBody DirectorDTO directorDTO) throws BusinessException{
 		
-		//Director director = mapper.map(directorDTO, Director.class);
+		Director director = mapper.map(directorDTO, Director.class);
 		
-		Optional<ResponseTransfer<Usuario>> optional = userService.registrarUsuario(directorDTO);
+		Optional<ResponseTransfer<Usuario>> optional = userService.registrarUsuario(director);
 		
 		if(optional.isPresent()) {
 			

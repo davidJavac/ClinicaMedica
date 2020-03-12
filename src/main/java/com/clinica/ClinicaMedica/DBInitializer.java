@@ -9,11 +9,13 @@ import org.springframework.stereotype.Component;
 
 import com.clinica.ClinicaMedica.model.Especialidad;
 import com.clinica.ClinicaMedica.repository.EspecialidadRepository;
+import com.clinica.ClinicaMedica.repository.PacienteRepository;
 
 @Component
 public class DBInitializer implements CommandLineRunner{
 
 	private EspecialidadRepository especialidadRepository;
+	private PacienteRepository pacienteRepository;
 	
 	public DBInitializer(EspecialidadRepository especialidadRepository) {
 		
@@ -35,6 +37,9 @@ public class DBInitializer implements CommandLineRunner{
 		List<Especialidad> especialidades = new ArrayList<>();
 		Collections.addAll(especialidades, cardiologia, urologia, reumatologia);
 		especialidadRepository.saveAll(especialidades);
+		
+		
+		
 	}
 
 }
