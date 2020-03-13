@@ -31,22 +31,22 @@ public class DirectorController {
 	private ModelMapper mapper;
 	
 	@PostMapping("/director")
-	public ResponseEntity<String> registrarDirector(@Valid @RequestBody DirectorDTO directorDTO) throws BusinessException{
+	public ResponseEntity<ResponseTransfer> registrarDirector(@Valid @RequestBody DirectorDTO directorDTO) throws BusinessException{
 		
 		Director director = mapper.map(directorDTO, Director.class);
 		
 		Optional<ResponseTransfer<Usuario>> optional = userService.registrarUsuario(director);
 		
 
-		return new ResponseEntity<>("hello worldsdf", HttpStatus.OK);
 
-		/*if(optional.isPresent()) {
+		if(optional.isPresent()) {
 			
+			return new ResponseEntity<>(optional.get(), HttpStatus.OK);
 		}
 		else {
 			ResponseTransfer rt = new ResponseTransfer("Error al intentar registrar el usuario", null);
 			return new ResponseEntity<ResponseTransfer>(rt, HttpStatus.BAD_REQUEST);
-		}*/
+		}
 			
 		
 	}
