@@ -37,14 +37,14 @@ public class DirectorController {
 		
 		Optional<ResponseTransfer<Usuario>> optional = userService.registrarUsuario(director);
 		
-		if(optional.isPresent()) {
+		return new ResponseEntity<>(optional.get(), HttpStatus.OK);
+		/*if(optional.isPresent()) {
 			
-			return new ResponseEntity<>(optional.get(), HttpStatus.BAD_GATEWAY);
 		}
 		else {
 			ResponseTransfer rt = new ResponseTransfer("Error al intentar registrar el usuario", null);
 			return new ResponseEntity<ResponseTransfer>(rt, HttpStatus.BAD_REQUEST);
-		}
+		}*/
 			
 		
 	}
