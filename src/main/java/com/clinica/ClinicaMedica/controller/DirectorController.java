@@ -39,7 +39,7 @@ public class DirectorController {
 		
 		if(optional.isPresent()) {
 			
-			return new ResponseEntity<>(optional.get(), HttpStatus.CREATED);
+			return new ResponseEntity<>(optional.get(), HttpStatus.BAD_GATEWAY);
 		}
 		else {
 			ResponseTransfer rt = new ResponseTransfer("Error al intentar registrar el usuario", null);
