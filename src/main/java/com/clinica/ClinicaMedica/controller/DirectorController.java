@@ -37,7 +37,7 @@ public class DirectorController {
 		
 		Optional<ResponseTransfer<Usuario>> optional = userService.registrarUsuario(director);
 		
-		return new ResponseEntity<>("hello world", HttpStatus.OK);
+		return new ResponseEntity<>("hello worldsdf", HttpStatus.OK);
 		/*if(optional.isPresent()) {
 			
 		}
