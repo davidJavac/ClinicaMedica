@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class ClinicaMedicaApplication {
 
 	public static void main(String[] args) {
-		System.out.println("running ClinicaMedicaApplication...");
+		System.out.println("running ClinicaMedicaApplication....");
 		SpringApplication.run(ClinicaMedicaApplication.class, args);
 	}
 
