@@ -114,7 +114,7 @@ public class TurnoService implements Operacionable{
 			Optional<Especialidad> optional_especialidad = especialidadRepository.findById(turno.getPrestacion().getEspecialidad().
 					getId_especialidad());
 			
-			if(!optional_medico.isPresent()) throw new BusinessException("No existe un médico con el Id solicitado", null);
+			if(!optional_medico.isPresent()) throw new BusinessException("No existe un médico con el Id solicitado en el sistema", null);
 			if(!optional_paciente.isPresent()) throw new BusinessException("No existe un paciente con el Id solicitado", null);
 			if(!optional_especialidad.isPresent()) throw new BusinessException("No existe una especialidad"
 					+ " con el Id solicitado", null);
