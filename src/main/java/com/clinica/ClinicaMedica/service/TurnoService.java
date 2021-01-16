@@ -152,7 +152,7 @@ public class TurnoService implements Operacionable{
 			Turno turno_fetched = optional_turno.get(); 
 			turno_fetched.setAsistencia(turno.getAsistencia());
 			Turno turno_update = turnoRepository.save(turno_fetched);
-			ResponseTransfer<Turno> rt = new ResponseTransfer("Se ha actualizado el turno exitosamente" , turno_update);
+			ResponseTransfer<Turno> rt = new ResponseTransfer("Se ha actualizado el turno exitosamente en el sistema" , turno_update);
 			return Optional.of(rt);
 			
 		}
