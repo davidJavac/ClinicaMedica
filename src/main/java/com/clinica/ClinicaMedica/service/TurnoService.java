@@ -92,7 +92,7 @@ public class TurnoService implements Operacionable{
 			return Optional.of(rt);
 		}
 		else
-			throw new BusinessException("El turno solicitado no está registrado", null);
+			throw new BusinessException("El turno solicitado no está registrado en el sistema", null);
 		
 	}
 
