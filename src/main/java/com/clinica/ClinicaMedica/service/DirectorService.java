@@ -6,5 +6,5 @@ import com.clinica.ClinicaMedica.model.Director;
 
 public interface DirectorService {
 	
-	public Optional<Director> buscarDirector(Long id);
+	public Optional<Director> buscarDirector(Long id);//buscar director por id
 }
