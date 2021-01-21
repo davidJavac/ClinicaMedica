@@ -18,8 +18,10 @@ public class AdministrativoServiceImpl implements AdministrativoService {
 	public Optional<Administrativo> buscarAdministrativo(Long id) {
 		// TODO Auto-generated method stub
 		try {
+
 			
 			return Optional.empty();
+
 			
 		}
 		catch(Exception e) {
