@@ -19,7 +19,7 @@ public class AdministrativoServiceImpl implements AdministrativoService {
 		// TODO Auto-generated method stub
 		try {
 			
-			return Optional.of(administrativoRepository.findById(id).get()) ;
+			return Optional.empty();
 			
 		}
 		catch(Exception e) {
