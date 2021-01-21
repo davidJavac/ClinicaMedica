@@ -36,7 +36,8 @@ public class RecetaService implements Operacionable {
 		// TODO Auto-generated method stub
 
 		Receta receta = (Receta) t;
-		Optional<Paciente> optional_paciente = pacienteRepository.findById(receta.getPaciente().getId());
+		Long id = receta.getPaciente().getId();
+		Optional<Paciente> optional_paciente = pacienteRepository.findById(id);
 
 		if (optional_paciente.isPresent()) {
 			
