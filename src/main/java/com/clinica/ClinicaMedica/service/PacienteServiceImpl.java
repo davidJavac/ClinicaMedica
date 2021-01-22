@@ -12,7 +12,7 @@ import com.clinica.ClinicaMedica.repository.PacienteRepository;
 public class PacienteServiceImpl implements PacienteService {
 
 	@Autowired
-	PacienteRepository pacienteRepository;
+	PacienteRepository pacienteRepository;//db paciente
 
 	@Override
 	public Optional<Paciente> buscarPaciente(Long id) {
