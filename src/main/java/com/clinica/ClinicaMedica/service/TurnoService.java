@@ -114,7 +114,7 @@ public class TurnoService implements Operacionable{
 			Optional<Especialidad> optional_especialidad = especialidadRepository.findById(turno.getPrestacion().getEspecialidad().
 					getId_especialidad());
 			
-			if(!optional_medico.isPresent()) throw new BusinessException("No existe un médico con el Id solicitado", null);
+			if(!optional_medico.isPresent()) throw new BusinessException("No existe un médico con el Id solicitado en el sistema", null);
 			if(!optional_paciente.isPresent()) throw new BusinessException("No existe un paciente con el Id solicitado", null);
 			if(!optional_especialidad.isPresent()) throw new BusinessException("No existe una especialidad"
 					+ " con el Id solicitado", null);
@@ -152,7 +152,9 @@ public class TurnoService implements Operacionable{
 			Turno turno_fetched = optional_turno.get(); 
 			turno_fetched.setAsistencia(turno.getAsistencia());
 			Turno turno_update = turnoRepository.save(turno_fetched);
-			ResponseTransfer<Turno> rt = new ResponseTransfer("Se ha actualizado el turno exitosamente" , turno_update);
+
+			ResponseTransfer<Turno> rt = new ResponseTransfer("Se ha actualizado el turno exitosamente en el sistema" , turno_update);
+
 			return Optional.of(rt);
 			
 		}

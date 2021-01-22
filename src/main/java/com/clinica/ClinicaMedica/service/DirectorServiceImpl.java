@@ -36,8 +36,8 @@ public class DirectorServiceImpl implements DirectorService {
 	public Optional<Director> buscarDirector(Long id) {
 		// TODO Auto-generated method stub
 		try {
-			
-			return Optional.of(directorRepository.findById(id).get()) ;
+			Optional<Director> optional = directorRepository.findById(id); 
+			return Optional.of(optional.get()) ;
 			
 		}
 		catch(Exception e) {
