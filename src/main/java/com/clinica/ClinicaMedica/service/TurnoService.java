@@ -174,7 +174,8 @@ public class TurnoService implements Operacionable{
 		// TODO Auto-generated method stub	
 		TurnoServiceEvento serviceEvento = (TurnoServiceEvento) visitor;
 		serviceEvento.setSujetoEvento(new SujetoEventoTurno());
-		return visitor.visit(this);
+		return Optional.empty();
+		//return visitor.visit(this);
 	}
 
 
