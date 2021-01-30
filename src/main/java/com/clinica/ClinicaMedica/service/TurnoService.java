@@ -166,7 +166,7 @@ public class TurnoService implements Operacionable{
 	@Override
 	public Optional eliminar(Object t)  throws BusinessException{
 		// TODO Auto-generated method stub
-		return Optional.empty();
+		return Optional.empty();//return empty optional
 	}
 
 	@Override
